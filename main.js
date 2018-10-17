@@ -4435,32 +4435,40 @@ console.table(eventCount)
 
 // 3. List all Github users who submitted a pull request that was approved by Steve.
  
-pullRequest = []
-githubData.forEach((event) => {
-    let i = githubData.indexOf(event)
-    for(const data in event) {
-        if (data === "payload") {
-            if (githubData[i].payload.is("pull_request")){
-                if ()
-            }
-        }
-    }
-})
-console.log(pullRequests)
-
-// pullRequests = []
+// pullRequest = []
 // githubData.forEach((event) => {
-//   let i = githubData.indexOf(event)
-//   for (const eventData in event) {
-//     if (eventData === "payload") {
-//       if (githubData[i].payload.hasOwnProperty("pull_request")){
-//         if(githubData[i].payload.pull_request.user.login !== "stevebrownlee" && githubData[i].payload.pull_request.merge_commit_sha !== null){
-//           pullRequests.push(githubData[i].payload.pull_request.user.login)
-//         }
+//     let i = githubData.indexOf(event)
+//     for(const data in event) {
+//         if (data === "payload") {
+//                 if (githubData[i].payload.hasOwnProperty("pull_request")){
+//                     if(githubData[i].payload.pull_request.user.login !== "stevebrownlee" && githubData[i].payload.pull_request.merge_commit_sha !== null){
+//                         pullRequests.push(githubData[i].payload.pull_request.user.login)
 
-//       }
-//     }
-//   }
+//                     }
+//             }
+//         }
+// }
 // })
 
 // console.log(pullRequests)
+
+//pullRequest empty Array
+pullRequests = []
+//for each key in the object
+githubData.forEach((event) => {
+  let i = githubData.indexOf(event)
+  for (const eventData in event) {
+//eventData has to be equal to payload or it will be false
+    if (eventData === "payload") {
+//if githubData's property,payload, is equal to user stevebrownloee approval, push pull request with user login information 
+      if (githubData[i].payload.hasOwnProperty("pull_request")){
+        if(githubData[i].payload.pull_request.user.login !== "stevebrownlee" && githubData[i].payload.pull_request.merge_commit_sha !== null){
+          pullRequests.push(githubData[i].payload.pull_request.user.login)
+        }
+
+      }
+    }
+  }
+})
+
+console.log(pullRequests)
